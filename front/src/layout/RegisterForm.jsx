@@ -1,91 +1,119 @@
-import axios from 'axios'
-import {useState} from "react";
+import axios from "axios";
+import { useState } from "react";
 
 export default function RegisterForm() {
   const [input, setInput] = useState({
-    username : '', 
-    password : '',
-    confirmPassword : '',
-    email : ''
-  })
+    username: "",
+    password: "",
+    confirmPassword: "",
+    email: "",
+  });
 
-  const hdlChange = e => {
-    setInput( prv => ( { ...prv, [e.target.name] : e.target.value } ) )
-  }
+  const hdlChange = (e) => {
+    setInput((prv) => ({ ...prv, [e.target.name]: e.target.value }));
+  };
 
-  const hdlSubmit = async e => {
+  const hdlSubmit = async (e) => {
     try {
-      e.preventDefault()
+      e.preventDefault();
       // validation
-      if(input.password !== input.confirmPassword) {
-        return alert('Please check confirm password')
+      if (input.password !== input.confirmPassword) {
+        return alert("Please check confirm password");
       }
-      const rs = await axios.post('http://localhost:8000/auth/register', input)
-      console.log(rs)
-      if(rs.status === 200) {
-        alert('Register Successful')
+      const rs = await axios.post("http://localhost:8000/auth/register", input);
+      console.log(rs);
+      if (rs.status === 200) {
+        alert("Register Successful");
       }
-    }catch(err) {
-      console.log( err.message)
+    } catch (err) {
+      console.log(err.message);
     }
-
-  }
+  };
 
   return (
-    <div className="p-5 border w-4/6 min-w-[500px] mx-auto rounded mt-5 ">
-      <div className="text-3xl mb-5">Register Form</div>
-      <form className="flex flex-col gap-2" onSubmit={hdlSubmit}>
+    <div className="flex justify-end p-5  w-4/6 min-w-[800px] min-h-[650px] mx-auto rounded mt-5 ">
+      <form
+        className="flex flex-col items-end m-8  gap-2 w-full max-w-xs"
+        onSubmit={hdlSubmit}
+      >
+        <div
+          className="text-3xl mb-5  text-white "
+          style={{ textShadow: "0 0 0.5rem orange" }}
+        >
+          Register Form
+        </div>
         <label className="form-control w-full max-w-xs">
           <div className="label">
-            <span className="label-text">username</span>
+            <span
+              className="label-text  text-white "
+              style={{ textShadow: "0 0 0.5rem orange" }}
+            >
+              username
+            </span>
           </div>
           <input
             type="text"
-            className="input input-bordered w-full max-w-xs"
+            className="input input-bordered w-full max-w-xs min-w-[350px]"
             name="username"
             value={input.username}
-            onChange={ hdlChange }
+            onChange={hdlChange}
           />
         </label>
         <label className="form-control w-full max-w-xs">
           <div className="label">
-            <span className="label-text">E-mail</span>
+            <span
+              className="label-text  text-white "
+              style={{ textShadow: "0 0 0.5rem orange" }}
+            >
+              E-mail
+            </span>
           </div>
           <input
             type="email"
-            className="input input-bordered w-full max-w-xs"
+            className="input input-bordered w-full max-w-xs min-w-[350px]"
             name="email"
             value={input.email}
-            onChange={ hdlChange }
+            onChange={hdlChange}
           />
         </label>
         <label className="form-control w-full max-w-xs">
           <div className="label">
-            <span className="label-text">password</span>
+            <span
+              className="label-text  text-white "
+              style={{ textShadow: "0 0 0.5rem orange" }}
+            >
+              password
+            </span>
           </div>
           <input
             type="password"
-            className="input input-bordered w-full max-w-xs"
+            className="input input-bordered w-full max-w-xs min-w-[350px]"
             name="password"
-            value={ input.password }
-            onChange={ hdlChange }
+            value={input.password}
+            onChange={hdlChange}
           />
         </label>
         <label className="form-control w-full max-w-xs">
           <div className="label">
-            <span className="label-text">Confirm Password</span>
+            <span
+              className="label-text  text-white "
+              style={{ textShadow: "0 0 0.5rem orange" }}
+            >
+              Confirm Password
+            </span>
           </div>
           <input
-            type="password"
-            className="input input-bordered w-full max-w-xs"
-            name="confirmPassword"
-            value={input.confirmPassword}
-            onChange={ hdlChange }
+            type="email"
+            className="input input-bordered w-full max-w-xs min-w-[350px]"
+            name="email"
+            value={input.email}
+            onChange={hdlChange}
           />
         </label>
-        <div className="flex gap-5 ">
-          <button type="submit" className="btn btn-outline btn-info mt-7">Submit</button>
-          <button type="reset" className="btn btn-outline btn-warning mt-7">Reset</button>
+        <div>
+          <button type="submit" className="btn btn-outline btn-info m-5">
+            Submit
+          </button>
         </div>
       </form>
     </div>

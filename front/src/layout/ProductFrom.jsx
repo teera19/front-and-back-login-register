@@ -28,12 +28,12 @@ export default function ProductForm() {
   }
 
   return (
-    <form className="flex flex-col min-w-[600px] border rounded w-5/6 mx-auto p-4 gap-6"
+    <form className="flex flex-col min-w-[600px] rounded w-5/6 mx-auto p-4 gap-6 m-10 mt-[120px]"
         onSubmit={hdlSubmit}
     >
       <label className="form-control w-full ">
         <div className="label">
-          <span className="label-text">Title</span>
+          <span className="label-text  text-white">Title</span>
         </div>
         <input
           type="text"
@@ -46,7 +46,7 @@ export default function ProductForm() {
       </label>
       <label className="form-control w-full ">
         <div className="label">
-          <span className="label-text">Detail</span>
+          <span className="label-text  text-white">Detail</span>
         </div>
         <input
           type="text"
@@ -59,7 +59,7 @@ export default function ProductForm() {
       </label>
       <label className="form-control w-full ">
         <div className="label">
-          <span className="label-text">Price</span>
+          <span className="label-text  text-white">Price</span>
         </div>
         <input
           type="number"
@@ -71,7 +71,7 @@ export default function ProductForm() {
         />
       </label>
       
-      <button className="btn btn-primary">Add new</button>
+      <button className="btn btn-primary mt-5">Add new</button>
     </form>
   );
 }

@@ -17,8 +17,22 @@ export default function UserHome() {
 
   return (
     <>
-    <div>UserHome</div>
-    { JSON.stringify(products)}
+    <div className=' text-white m-8'>
+    <div>
+      <h2>Product List</h2>
+      <hr />
+      <ul>
+        {products.map(product => (
+          <li key={product.id}>
+            <h3>{product.title}</h3>
+            <p>Price: ${product.price}</p>
+            <p>{product.detail}</p>
+            <hr />
+          </li>
+        ))}
+      </ul>
+    </div>
+    </div>
     </>
   )
 }

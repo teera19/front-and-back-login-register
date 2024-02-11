@@ -24,10 +24,7 @@ export default function Header() {
     navigate('/')
   }
   return (
-    <div className="navbar bg-base-100">
-      <div className="flex-1">
-        <a className="btn btn-ghost text-xl">Hello, {user?.id? user.username:"Guest"}</a>
-      </div>
+    <div className="navbar bg-base-100 flex flex-col items-end">
       <div className="flex-none">
         <ul className="menu menu-horizontal px-1">
           { finalNav.map( el => (
