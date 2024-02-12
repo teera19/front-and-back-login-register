@@ -21,7 +21,6 @@ export default function ProductForm() {
       const rs = await axios.post('http://localhost:8000/products', output, {
         headers : { Authorization : `Bearer ${token}`}
       })
-      alert('Create new OK')
     }catch(err) {
       alert(err.message)
     }

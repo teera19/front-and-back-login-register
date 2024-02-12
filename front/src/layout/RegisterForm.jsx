@@ -23,7 +23,6 @@ export default function RegisterForm() {
       const rs = await axios.post("http://localhost:8000/auth/register", input);
       console.log(rs);
       if (rs.status === 200) {
-        alert("Register Successful");
       }
     } catch (err) {
       console.log(err.message);
