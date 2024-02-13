@@ -14,7 +14,15 @@ export default function UserHome() {
       const rs = await axios.get('http://localhost:8000/products', {
         headers : { Authorization : `Bearer ${token}`}
       })
+      const productsWithImageUrl = rs.data.products.map(product => {
+        return {
+          ...product,
+          imageUrl: product.imageUrl ? `http://localhost:8000/uploads/${product.imageUrl}` : null
+        };
+      });
+      console.log(rs.data.products)
      setProducts(rs.data.products)
+     setProducts(productsWithImageUrl);
     }
     run()
   }, [trigger] )
@@ -35,7 +43,9 @@ export default function UserHome() {
       <ModalEdit el={products[editIdx]} closeModal={closeModal} setTrigger={setTrigger}/>
       <div className="flex flex-col gap-4">
         {products.map((el) => (
-          <ProductCard key={el.id} el={el} openModal={openModal} setTrigger={setTrigger}/>
+          <div key={el.id}>
+          <ProductCard el={el} openModal={openModal} setTrigger={setTrigger} />
+        </div>
         ))}
       </div>
     </div>

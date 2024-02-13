@@ -32,6 +32,7 @@ export default function ProductCard(props) {
           <div className="badge badge-secondary" onClick={hdlDelete}>delete</div>
         </div>
         <div className="flex">
+        {el.imageUrl && <img src={el.imageUrl} alt={el.title} className=" w-[300px]" />}
           <p className="text-right">Detail : {el.detail}</p>
           <p className="text-right">Price : {el.price}</p>
         </div>

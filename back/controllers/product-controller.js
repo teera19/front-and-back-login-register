@@ -1,4 +1,5 @@
 const db = require('../models/db')
+const multer = require('multer');
 
 exports.getByUser = async (req, res, next) => {
   try {
@@ -12,43 +13,79 @@ exports.getByUser = async (req, res, next) => {
 
 }
 
-exports.createProduct = async(req,res,next)=>{
-//validation req.body
- const data = {title, detail, price} = req.body
-  try{
-    const rs = await db.product.create({
-      data: {
-        title: title,
-        detail: detail,
-        price: parseInt(price),
-        userId: req.user.id
-      }
-    });
-    res.json({ msg: 'Create Succes' , result:rs})
-  }catch(err){
-    next(err)
+const storage = multer.diskStorage({
+  destination: function (req, file, cb) {
+    cb(null, 'uploads/')
+  },
+  filename: function (req, file, cb) {
+    cb(null, Date.now() + '-' + file.originalname)
   }
+})
+
+const upload = multer({ storage: storage }).single('image');
+
+exports.createProduct = async(req,res,next)=>{
+  //validation req.body
+  upload(req, res, async function (err) {
+    if (err instanceof multer.MulterError) {
+      return res.status(500).json(err)
+    } else if (err) {
+      return res.status(500).json(err)
+    }
+    const { title, detail, price } = req.body;
+    const imageUrl = req.file ? req.file.filename : null;
+    try{
+      const rs = await db.product.create({
+        data: {
+          title: title,
+          detail: detail,
+          price: parseInt(price),
+          imageUrl: imageUrl,
+          userId: req.user.id,
+        }
+      });
+      res.json({ msg: 'Create Success', result: rs })
+    } catch(err) {
+      next(err)
+    }
+  })
 }
 
 exports.updateProduct = async (req, res, next) => {
-  // validate req.params + req.body
-  const {id} = req.params
-  const data = {title, detail, price} = req.body
-  try {
-    const rs = await db.product.update({
-      data :  {
+  //validation req.body
+  upload(req, res, async function (err) {
+    if (err instanceof multer.MulterError) {
+      return res.status(500).json(err)
+    } else if (err) {
+      return res.status(500).json(err)
+    }
+    
+    const { id } = req.params;
+    const { title, detail, price } = req.body;
+    const imageUrl = req.file ? req.file.filename : null;
+
+    try {
+      const updateData = {
         title: title,
         detail: detail,
         price: parseInt(price),
-        userId: req.user.id
-      },
-      where: { id : +id , userId : req.user.id} 
-    })
-    res.json({msg: 'Update ok', result: rs})
-  }catch(err){
-    next(err)
-  }
-}
+      };
+
+      if (imageUrl) {
+        updateData.imageUrl = imageUrl;
+      }
+
+      const rs = await db.product.update({
+        where: { id: +id, userId: req.user.id },
+        data: updateData,
+      });
+
+      res.json({ msg: 'Update Success', result: rs });
+    } catch(err) {
+      next(err);
+    }
+  });
+};
 
 exports.deleteProduct = async (req,res,next)=>{
   const {id} = req.params

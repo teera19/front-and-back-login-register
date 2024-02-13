@@ -102,11 +102,12 @@ model Product {
   detail         String
   user           User            @relation(fields: [userId], references: [id], onDelete: Cascade, onUpdate: Cascade)
   userId         Int             @map("user_id")
+  imageUrl       String?
   product_img    Product_Img[]
   order_products Order_Product[]
+
   @@map("products")
 }
-
 
 model Product_Img {
   id        Int     @id @default(autoincrement())

@@ -4,9 +4,10 @@ import { useState, useEffect } from "react";
 export default function ModalEdit(props) {
   const { el, closeModal, setTrigger } = props;
   const [input, setInput] = useState({
-    title: "",
-    detail: "",
-    price: "",
+    title: el?.title || "",
+    detail: el?.detail || "",
+    price: el?.price || "",
+    image: null,
   });
   const [status, setStatus] = useState([])
 
@@ -20,28 +21,48 @@ export default function ModalEdit(props) {
 
   useEffect(() => {
     setInput({
-      title: el?.title,
-      detail: el?.title,
-      price: el?.price,
+      title: el?.title || "",
+      detail: el?.detail || "",
+      price: el?.price || "",
     });
   }, [el?.id]);
 
   const hdlChange = (e) => {
     setInput((prv) => ({ ...prv, [e.target.name]: e.target.value }));
   };
-  const hdlSubmit = async (e) => {
-    try {
-      e.preventDefault();
 
-      const output = { ...input };
+  const handleImageChange = (e) => {
+    setInput((prev) => ({ ...prev, image: e.target.files[0] }));
+  };
+
+
+  const hdlSubmit = async e => {
+    e.preventDefault()
+    const formData = new FormData(); 
+    formData.append("title", input.title);
+    formData.append("detail", input.detail);
+    formData.append("price", input.price);
+    formData.append("image", input.image);
+
+    console.log(formData)
+
+
+    try {
       const token = localStorage.getItem("token");
-      const rs = await axios.put(`http://localhost:8000/products/${el.id}`, output, {
-        headers : { Authorization : `Bearer ${token}`}
-      })
-      
-      setTrigger(prv => !prv)
-    } catch (err) {
-      alert(err.message);
+      const response = await axios.put(
+        `http://localhost:8000/products/${el.id}`,
+        formData, 
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+            "Content-Type": "multipart/form-data" 
+          }
+        }
+      );
+      console.log(response.data);
+    } catch (error) {
+      console.error(error);
+      console.log(error.response.data);
     }
   };
 
@@ -80,7 +101,7 @@ export default function ModalEdit(props) {
               <span className="label-text">Price</span>
             </div>
             <input
-              type="text"
+              type="number"
               placeholder="Type here"
               className="input input-bordered w-full "
               name="price"
@@ -88,6 +109,17 @@ export default function ModalEdit(props) {
               onChange={hdlChange}
             />
           </label>
+          <label className="form-control w-full">
+        <div className="label">
+          <span className="label-text text-white">Image</span>
+        </div>
+        <input
+          type="file"
+          accept="image/*"
+          className="input input-bordered w-full"
+          onChange={handleImageChange}
+        />
+      </label>
           <button type='submit' className="btn btn-primary" onClick={closeModal}>Update</button>
           <button type='button' className="btn btn-secondary" onClick={closeModal}>Cancel</button>
         </form>
