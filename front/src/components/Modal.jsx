@@ -42,7 +42,7 @@ export default function Modal(props) {
         <form className="flex flex-col border rounded w-5/6 mx-auto p-4 gap-4" onSubmit={hdlSubmit}>
           <label className="form-control w-full ">
             <div className="label">
-              <span className="label-text">Todo title</span>
+              <span className="label-text">Product Title</span>
             </div>
             <input
               type="text"
@@ -54,9 +54,6 @@ export default function Modal(props) {
             />
           </label>
           <label className="form-control w-full max-w-[220px] ">
-            <div className="label">
-              <span className="label-text">Due Date</span>
-            </div>
             <input type="date" name="dueDate" value={input.dueDate} onChange={hdlChange} />
           </label>
           <select className="select select-bordered w-full max-w-xs"

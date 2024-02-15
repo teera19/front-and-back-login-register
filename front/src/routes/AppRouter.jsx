@@ -6,6 +6,9 @@ import ProductForm from "../layout/ProductFrom";
 import useAuth from "../hooks/useAuth";
 import UserHome from "../layout/UserHome";
 import Header from "../layout/Header";
+import BuyItem from "../layout/AllItem";
+import AllItem from "../layout/AllItem";
+
 
 const guestRouter = createBrowserRouter([
   {
@@ -34,8 +37,10 @@ const userRouter = createBrowserRouter([
       </>
     ),
     children: [
-      { index: true, element: <UserHome /> },
+      { index: true, element: <AllItem /> },
+      { path: "/profile", element: <UserHome/> },
       { path: "/new", element: <ProductForm/> },
+      { path: "/buy", element: <BuyItem/> },
     ],
   },
 ]);

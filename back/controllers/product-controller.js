@@ -1,6 +1,15 @@
 const db = require('../models/db')
 const multer = require('multer');
 
+exports.getAllUserProducts = async (req, res, next) => {
+  try {
+    const products = await db.product.findMany();
+    res.json({ products });
+  } catch (err) {
+    next(err);
+  }
+};
+
 exports.getByUser = async (req, res, next) => {
   try {
     const products = await db.product.findMany({

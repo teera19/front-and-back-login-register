@@ -39,7 +39,7 @@ export default function UserHome() {
 
   return (
     <div className="flex flex-col gap-4 items-center">
-      
+      <div className=' text-3xl m-5 text-white'>สินค้าของฉัน</div>
       <ModalEdit el={products[editIdx]} closeModal={closeModal} setTrigger={setTrigger}/>
       <div className="flex flex-row gap-4 flex-wrap justify-center">
         {products.slice(0, 6).map((el) => (
@@ -58,3 +58,48 @@ export default function UserHome() {
     </div>
   );
  }
+
+
+//  <div className="navbar flex text-white ">
+//  <div className="ml-[1100px] flex flex-row mt-5">
+//    <ul className="flex flex-row gap-4">
+//      {finalNav.map((el) => (
+//        <li key={el.to}></li>
+//      ))}
+//      {user?.id && (
+//        <div>
+//          <Link to="/profile">
+//            <FaUser
+//              size={20}
+//              className="text-white inline-block text-center absolute ml-[-130px]"
+//            />
+//          </Link>
+//          <div>
+//            <FaShoppingCart
+//              size={22}
+//              className="text-white inline-block text-center absolute ml-[-170px] "
+//            />
+//          </div>
+//          <div>
+//            <div className="text-white inline-block text-center absolute ml-[-100px] ">
+//              <Link to="/">สินค้าทั้งหมด</Link>
+//            </div>
+//            <li className=" ml-24">
+//              <Link to="#" onClick={hdlLogout}>
+//                Logout
+//              </Link>
+             
+//            </li>
+//            <li className=" mt-[-24px] ml-8">
+//            <Link to="/new" onClick={hdlLogout}>
+//                Create
+//              </Link>
+//            </li>
+//          </div>
+//        </div>
+//      )}
+//    </ul>
+//  </div>
+// </div>
+
+// <Link to={el.to}>{el.text}</Link>
