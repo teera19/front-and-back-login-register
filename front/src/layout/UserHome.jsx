@@ -38,16 +38,23 @@ export default function UserHome() {
   }
 
   return (
-    <div className="flex flex-col gap-4">
-      <div className="text-center text-2xl text-blue-500 mt-5">Your Products</div>
+    <div className="flex flex-col gap-4 items-center">
+      
       <ModalEdit el={products[editIdx]} closeModal={closeModal} setTrigger={setTrigger}/>
-      <div className="flex flex-col gap-4">
-        {products.map((el) => (
+      <div className="flex flex-row gap-4 flex-wrap justify-center">
+        {products.slice(0, 6).map((el) => (
           <div key={el.id}>
-          <ProductCard el={el} openModal={openModal} setTrigger={setTrigger} />
-        </div>
+            <ProductCard el={el} openModal={openModal} setTrigger={setTrigger} />
+          </div>
+        ))}
+      </div>
+      <div className="flex flex-row gap-4 flex-wrap justify-center">
+        {products.slice(6).map((el) => (
+          <div key={el.id}>
+        ++    <ProductCard el={el} openModal={openModal} setTrigger={setTrigger} />
+          </div>
         ))}
       </div>
     </div>
   );
-}
+ }

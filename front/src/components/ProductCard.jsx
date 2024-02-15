@@ -4,37 +4,41 @@ import React from "react";
 export default function ProductCard(props) {
   const { el, openModal, setTrigger } = props;
 
-  const statusColor =  'bg-pink-300' 
-    'bg-blue-300' , 'bg-lime-300'
-  const hdlDelete = async e => {
+  const statusColor = "bg-white";
+  const hdlDelete = async (e) => {
     try {
-      e.stopPropagation()
-      const token = localStorage.getItem('token')
+      e.stopPropagation();
+      const token = localStorage.getItem("token");
       let rs = await axios.delete(`http://localhost:8000/products/${el.id}`, {
-        headers : { Authorization : `Bearer ${token}`}
-      })
+        headers: { Authorization: `Bearer ${token}` },
+      });
 
-      setTrigger(prv=>!prv)
+      setTrigger((prv) => !prv);
     } catch (err) {
-      console.log(err)
+      console.log(err);
     }
-  }
+  };
 
   return (
-    <div
-      className={`card w-5/6 ${statusColor} shadow-xl mx-auto cursor-pointer
-      active:shadow-none active:translate-x-2 active:translate-y-1`}
-      onClick={() => openModal(el.id)}
-    >
-      <div className="card-body">
-        <div className="flex justify-between">
-          <h2 className="card-title">{el.title}</h2>
-          <div className="badge badge-secondary" onClick={hdlDelete}>delete</div>
-        </div>
-        <div className="flex">
-        {el.imageUrl && <img src={el.imageUrl} alt={el.title} className=" w-[300px]" />}
-          <p className="text-right">Detail : {el.detail}</p>
-          <p className="text-right">Price : {el.price}</p>
+    <div className="flex justify-center ">
+      <div
+        className={`card ${statusColor} `}
+        onClick={() => openModal(el.id)}
+      >
+        <div className="card-body">
+          <div className="flex justify-between">
+            <h2 className="card-title">{el.title}</h2>
+            <div className="badge badge-secondary" onClick={hdlDelete}>
+              delete
+            </div>
+          </div>
+          <div className="flex flex-col">
+            {el.imageUrl && (
+              <img src={el.imageUrl} alt={el.title} className=" w-[300px]" />
+            )}
+            <p className="text-right">Detail : {el.detail}</p>
+            <p className="text-right">Price : {el.price}</p>
+          </div>
         </div>
       </div>
     </div>

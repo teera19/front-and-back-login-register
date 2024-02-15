@@ -1,6 +1,7 @@
 import { createBrowserRouter, RouterProvider, Outlet } from "react-router-dom";
 import LoginForm from "../layout/LoginForm";
 import RegisterForm from "../layout/RegisterForm";
+import Start from "../layout/Start";
 import ProductForm from "../layout/ProductFrom";
 import useAuth from "../hooks/useAuth";
 import UserHome from "../layout/UserHome";
@@ -16,7 +17,8 @@ const guestRouter = createBrowserRouter([
       </>
     ),
     children: [
-      { index: true, element: <LoginForm /> },
+      { index: true, element: <Start /> },
+      { path: "/login", element: <LoginForm /> },
       { path: "/register", element: <RegisterForm /> },
     ],
   },

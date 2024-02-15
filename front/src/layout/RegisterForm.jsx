@@ -1,5 +1,6 @@
 import axios from "axios";
 import { useState } from "react";
+import { useNavigate } from 'react-router-dom';
 
 export default function RegisterForm() {
   const [input, setInput] = useState({
@@ -28,6 +29,11 @@ export default function RegisterForm() {
       console.log(err.message);
     }
   };
+
+  const navigate = useNavigate();
+const hdlLogin = () => {
+  navigate('/login');
+};
 
   return (
     <div className="flex justify-end p-5  w-4/6 min-w-[800px] min-h-[650px] mx-auto rounded mt-5 ">
@@ -102,17 +108,23 @@ export default function RegisterForm() {
             </span>
           </div>
           <input
-            type="email"
+            type="password"
             className="input input-bordered w-full max-w-xs min-w-[350px]"
-            name="email"
-            value={input.email}
+            name="confirmPassword"
+            value={input.confirmPassword}
             onChange={hdlChange}
           />
         </label>
         <div>
           <button type="submit" className="btn btn-outline btn-info m-5">
-            Submit
+            Register
           </button>
+        </div>
+        <div className="flex row-auto">
+        <p className=" text-white">You have accounts?</p>
+          <p className=" btn-link m-5 mt-0 " onClick={hdlLogin}>
+          Login ?
+          </p>
         </div>
       </form>
     </div>

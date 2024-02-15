@@ -1,5 +1,8 @@
 import axios from "axios";
 import { useState } from "react";
+import { useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
+
 import useAuth from "../hooks/useAuth";
 
 export default function LoginForm() {
@@ -25,13 +28,20 @@ export default function LoginForm() {
       });
       console.log(rs1.data);
       setUser(rs1.data);
+      navigate('/');
     } catch (err) {
       console.log(err.message);
     }
   };
 
+  
+const navigate = useNavigate();
+const hdlRegister = () => {
+  navigate('/register');
+};
+
   return (
-    <div className="flex justify-end p-5 w-4/6 min-w-[800px] min-h-[650px] mx-auto rounded mt-5">
+    <div className="flex justify-end p-5 w-4/6 min-w-[300px] min-h-[350px] mx-auto rounded mt-5">
       <form
         className="flex flex-col items-end m-11  gap-2 w-full max-w-xs"
         onSubmit={hdlSubmit}
@@ -74,9 +84,15 @@ export default function LoginForm() {
         </label>
 
         <div>
-          <button type="submit" className="btn btn-outline btn-info m-5">
-            Login
+          <button type="submit" className="btn btn-outline btn-info m-3">
+          Login
           </button>
+        </div>
+        <div className="flex row-auto">
+        <p className="mt-8 text-white">You don't have accounts?</p>
+          <p className=" btn-link m-5 mt-8 " onClick={hdlRegister}>
+          Register ?
+          </p>
         </div>
       </form>
     </div>
