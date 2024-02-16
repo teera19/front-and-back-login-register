@@ -12,6 +12,7 @@ const userNav = [
   { to: "/", text1: "" },
   { to: "/profile", text2: "" },
   { to: "/new", text3: "Create" },
+  { to: "/buy", text4: "" },
 ];
 
 export default function Header() {
@@ -38,10 +39,13 @@ export default function Header() {
                 />
               </Link>
               <div>
+               <Link to="/buy">
                 <FaShoppingCart
                   size={22}
                   className="text-white inline-block text-center absolute ml-[-160px] "
+                  
                 />
+                </Link>
               </div>
               <div>
                 <div className="text-white inline-block text-center absolute ml-[-70px] ">

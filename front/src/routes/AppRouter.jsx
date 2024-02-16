@@ -6,8 +6,8 @@ import ProductForm from "../layout/ProductFrom";
 import useAuth from "../hooks/useAuth";
 import UserHome from "../layout/UserHome";
 import Header from "../layout/Header";
-import BuyItem from "../layout/AllItem";
 import AllItem from "../layout/AllItem";
+import BuyFrom from "../layout/BuyFrom";
 
 
 const guestRouter = createBrowserRouter([
@@ -40,7 +40,7 @@ const userRouter = createBrowserRouter([
       { index: true, element: <AllItem /> },
       { path: "/profile", element: <UserHome/> },
       { path: "/new", element: <ProductForm/> },
-      { path: "/buy", element: <BuyItem/> },
+      { path: "/buy", element: <BuyFrom/> },
     ],
   },
 ]);

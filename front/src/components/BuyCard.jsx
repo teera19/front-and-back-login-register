@@ -1,27 +1,33 @@
-import axios from "axios";
-import React from "react";
 
-export default function BuyCard(props) {
-  const { el, openModal, setTrigger } = props;
+import React, { useState } from 'react';
+import { useProduct } from '../contexts/ProductContext';
 
-  const statusColor = "bg-white";
-  
+const BuyCard = ({ el }) => {
+  const { setSelectedProduct } = useProduct();
+  const [selected, setSelected] = useState(false);
+
   return (
-    <div className="flex justify-center ">
+    <div className="flex justify-center">
       <div
-        className={`card ${statusColor} `}
-        onClick={() => openModal(el.id)}
+        className={`card bg-white`}
+        onClick={() => {
+          setSelectedProduct(el);
+          setSelected(!selected);
+        }}
       >
         <div className="card-body">
           <div className="flex justify-between">
             <h2 className="card-title">{el.title}</h2>
-            <div className="badge badge-secondary" >
+            <div className="badge badge-secondary" onClick={() => {
+              setSelectedProduct(el);
+              setSelected(!selected);
+            }}>
               Buy
             </div>
           </div>
           <div className="flex flex-col">
             {el.imageUrl && (
-              <img src={el.imageUrl} alt={el.title} className=" w-[300px]" />
+              <img src={el.imageUrl} alt={el.title} className="w-[300px]" />
             )}
             <p className="text-right">Detail : {el.detail}</p>
             <p className="text-right">Price : {el.price}</p>
@@ -30,4 +36,7 @@ export default function BuyCard(props) {
       </div>
     </div>
   );
-}
+};
+
+export default BuyCard;
+
