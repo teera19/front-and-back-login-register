@@ -54,6 +54,7 @@ exports.createProduct = async(req,res,next)=>{
         }
       });
       res.json({ msg: 'Create Success', result: rs })
+      console.log(imageUrl)
     } catch(err) {
       next(err)
     }

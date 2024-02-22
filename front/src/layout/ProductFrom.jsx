@@ -44,6 +44,7 @@ export default function ProductForm() {
 
     }
   };
+ console.log(handleImageChange)
 
   const [showPopup, setShowPopup] = useState(false);
 

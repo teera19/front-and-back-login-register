@@ -11,7 +11,7 @@ const guestNav = [
 const userNav = [
   { to: "/", text1: "" },
   { to: "/profile", text2: "" },
-  { to: "/new", text3: "Create" },
+  { to: "/new", text3: "" },
   { to: "/buy", text4: "" },
 ];
 
@@ -27,7 +27,7 @@ export default function Header() {
   };
 
   return (
-    <div className="navbar flex text-white ">
+    <div className="navbar flex text-white bg-sky-400 p-5">
       <div className="ml-[1100px] flex flex-row mt-5">
         <ul className="flex flex-row gap-4">
           {user?.id && (
@@ -35,32 +35,31 @@ export default function Header() {
               <Link to="/profile">
                 <FaUser
                   size={20}
-                  className="text-white inline-block text-center absolute ml-[-110px]"
+                  className="rounded-lg  text-white inline-block text-center absolute ml-[-110px] hover:bg-red-100  transition-transform transform-gpu hover:scale-125 bg-cover bg-center"
                 />
               </Link>
               <div>
                <Link to="/buy">
                 <FaShoppingCart
                   size={22}
-                  className="text-white inline-block text-center absolute ml-[-160px] "
+                  className="rounded-lg  text-white inline-block text-center absolute ml-[-160px]  hover:bg-red-100 transition-transform transform-gpu hover:scale-125 bg-cover bg-center"
                   
                 />
                 </Link>
               </div>
               <div>
-                <div className="text-white inline-block text-center absolute ml-[-70px] ">
+                <div className="text-white inline-block text-center absolute ml-[-70px]  hover:bg-red-100 transition-transform transform-gpu hover:scale-125 bg-cover bg-center rounded-lg ">
                   <Link to="/">สินค้าทั้งหมด</Link>
                 </div>
-                <li className=" ml-24">
+                <div className=" text-white inline-block text-center absolute ml-8  hover:bg-red-100 transition-transform transform-gpu hover:scale-125 bg-cover bg-center rounded-lg ">
+                  <Link to="/new">Create</Link>
+                </div>
+                <li className=" ml-24  hover:bg-red-100 transition-transform transform-gpu hover:scale-125 bg-cover bg-center rounded-lg " >
                   <Link to="#" onClick={hdlLogout}>
                     Logout
                   </Link>
                 </li>
-                <li className=" mt-[-24px] ml-8">
-                  {finalNav.map((el) => (
-                    <Link to={el.to}>{el.text3}</Link>
-                  ))}
-                </li>
+                
               </div>
             </div>
           )}

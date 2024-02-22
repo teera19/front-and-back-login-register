@@ -1,6 +1,8 @@
 import axios from "axios";
 import { useState, useEffect } from "react";
 import BuyCard from "../components/BuyCard";
+import SlideShow from "./SlideShow";
+
 
 export default function AllItem() {
   const [products, setProducts] = useState([]);
@@ -30,8 +32,11 @@ export default function AllItem() {
 
   return (
     <div>
-      <h1 className="text-3xl m-5 text-white text-center">สินค้าทั้งหมด</h1>
-      <div className="flex flex-row gap-4 flex-wrap justify-center">
+      <h1 className="text-3xl m-5 text-back text-center mb-[300px]">สินค้าทั้งหมด</h1>
+      <br />
+      <hr />
+      <SlideShow/>
+      <div className="flex flex-row gap-4 flex-wrap justify-center ">
         {products.map((product) => (
           <div key={product.id}>
             <BuyCard el={product} openModal={openModal} setTrigger={setTrigger} />
