@@ -47,7 +47,6 @@ export default function ProductForm() {
  console.log(handleImageChange)
 
   const [showPopup, setShowPopup] = useState(false);
-
   const hdlSuccess = () => {
     setShowPopup(true);
     setTimeout(() => {
